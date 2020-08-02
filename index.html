@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+    <title>tic tac toe</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+    
+
+    <div class="container">
+        <marquee><h2>Tic <span>tac</span> Toe</h2></marquee>
+        <div class="actions">
+        <div class="status" id="status">It's x turn</div>
+       
+    </div>
+    <div class="grid">
+        <div class="cells 1"  onclick="playerAction(this,0,0)"></div>
+        <div class="cells 2"   onclick="playerAction(this,0,1)"></div>
+        <div class="cells 3"   onclick="playerAction(this,0,2)"></div>
+        <div class="cells 4"  onclick="playerAction(this,1,0)"></div>
+        <div class="cells 5"  onclick="playerAction(this,1,1)"></div>
+        <div class="cells 6"  onclick="playerAction(this,1,2)"></div>
+        <div class="cells 7"   onclick="playerAction(this,2,0)"></div>
+        <div class="cells 8"   onclick="playerAction(this,2,1)"></div>
+        <div class="cells 9"  onclick="playerAction(this,2,2)"></div>
+    </div>
+    </div>
+    <script>
+        var turn = 1;
+        var win=-1;
+        var clickcount=0;
+        var matrix =[ [-1,-1,-1],
+                      [-1,-1,-1],
+                      [-1,-1,-1]
+                    ]
+       
+      function playerAction(elem ,row,col)
+      {
+          if (elem.innerHTML!="")return;
+          if(win!=-1) return;
+          clickcount++;
+
+          matrix[row][col] =turn;
+         
+        if(turn==1)
+        {
+            elem.innerHTML="x";
+            document.getElementById("status").innerHTML="it's O turn now";
+           
+            turn =2;
+        }
+        else if (turn==2)
+        {
+            elem.innerHTML="o";
+            document.getElementById("status").innerHTML="it's x turn now";
+            turn=1;
+        }
+        for(var i=0;i<3;i++)
+        {
+            if(matrix[i][0]==matrix[i][1] && matrix [i][1] == matrix[i][2]) win=matrix[i][0];
+        
+            if (matrix[0][i] == matrix[1][i] && matrix[1][i] ==matrix[2][i]) win=matrix [0][i];
+        }  
+        
+            if(matrix[0][0]==matrix[1][1] && matrix[1][1]==matrix[2][2]) win= matrix[0][0];
+            if (matrix[0][2]==matrix[1][1]&& matrix[1][1]==matrix[2][0]) win=matrix[0][2];
+        
+        if(win!=-1)
+        document.getElementById("status").innerHTML="player " + win + " has won the game.";
+
+        if(clickcount==9 && win==-1){
+            document.getElementById("status").innerHTML="Oops!Better luck next tym !!";
+
+        }
+      };
+
+ 
+
+      </script>
+</body>
